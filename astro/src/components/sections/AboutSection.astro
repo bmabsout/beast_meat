@@ -1,0 +1,82 @@
+---
+import Container from '../common/Container.astro';
+import Section from '../common/Section.astro';
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<Section class:list={['py-16 md:py-24', className]}>
+  <Container>
+    <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+      <!-- Text Content -->
+      <div class="space-y-8">
+        <div class="space-y-4">
+          <h2 class="font-heading text-4xl md:text-5xl">Crafting Excellence in Every Cut</h2>
+          <p class="text-slate-700 text-lg md:text-xl">
+            At Beast Meat, we combine traditional butchery expertise with innovative catering services to deliver exceptional culinary experiences.
+          </p>
+        </div>
+        
+        <!-- Values -->
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <h3 class="font-heading text-xl text-[var(--color-beast-red)]">Quality First</h3>
+            <p class="text-slate-600">Premium USDA selections and strict quality control in every step of our process.</p>
+          </div>
+          <div class="space-y-2">
+            <h3 class="font-heading text-xl text-[var(--color-beast-red)]">Local Focus</h3>
+            <p class="text-slate-600">Supporting our community through local sourcing and sustainable practices.</p>
+          </div>
+          <div class="space-y-2">
+            <h3 class="font-heading text-xl text-[var(--color-beast-red)]">Expert Service</h3>
+            <p class="text-slate-600">Professional team dedicated to exceptional customer service and culinary innovation.</p>
+          </div>
+          <div class="space-y-2">
+            <h3 class="font-heading text-xl text-[var(--color-beast-red)]">Custom Solutions</h3>
+            <p class="text-slate-600">Tailored services for events of any size, from intimate gatherings to large celebrations.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Grid -->
+      <div class="grid grid-cols-2 gap-4">
+        <div class="space-y-4">
+          <div class="aspect-[4/5] bg-slate-100 rounded-lg overflow-hidden">
+            <img
+              src="/images/catering_photos/cuts.jpg"
+              alt="Premium meat cuts selection"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="aspect-[4/3] bg-slate-100 rounded-lg overflow-hidden">
+            <img
+              src="/images/catering_photos/grape_leafs.jpg"
+              alt="Delicious grape leaf preparation"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+        <div class="space-y-4 pt-8">
+          <div class="aspect-[4/3] bg-slate-100 rounded-lg overflow-hidden">
+            <img
+              src="/images/catering_photos/474470988_17861235624339547_6562859976884574656_n.jpg"
+              alt="Catering presentation"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="aspect-[4/5] bg-slate-100 rounded-lg overflow-hidden">
+            <img
+              src="/images/catering_photos/474526161_17861510733339547_4694253364427067020_n.jpg"
+              alt="Professional catering service"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</Section> 

@@ -1,0 +1,177 @@
+---
+import Container from './Container.astro';
+import { Image } from 'astro:assets';
+
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/contact' }
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+  <Container>
+    <div class="flex items-center justify-between h-16 px-4">
+      <!-- Logo -->
+      <a href="/" class="flex items-center -ml-2">
+        <Image 
+          src="/images/logo.svg" 
+          alt="Beast Meat" 
+          width={120} 
+          height={48} 
+          class="h-10 w-auto text-[var(--color-slate-900)]" 
+        />
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-6">
+        {navigation.map(item => (
+          <a
+            href={item.href}
+            class={[
+              'text-[var(--color-slate-700)] hover:text-[var(--color-coral-500)] transition-colors',
+              currentPath === item.href ? 'text-[var(--color-coral-500)]' : ''
+            ].filter(Boolean).join(' ')}
+          >
+            {item.name}
+          </a>
+        ))}
+        <a href="/#services" class="text-[var(--color-slate-700)] hover:text-[var(--color-coral-500)] transition-colors">
+          Services
+        </a>
+        <a href="/contact" class="btn btn-primary">
+          Get in Touch
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        type="button" 
+        class="block md:hidden w-12 h-12 -mr-3 flex items-center justify-center text-gray-800 hover:text-[var(--color-coral-500)] transition-colors"
+        aria-label="Menu"
+        aria-expanded="false"
+      >
+        <div class="relative w-6 h-5">
+          <span class="absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out translate-y-0 top-0"></span>
+          <span class="absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out top-1/2 -translate-y-1/2"></span>
+          <span class="absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out bottom-0"></span>
+        </div>
+      </button>
+    </div>
+  </Container>
+</header>
+
+<!-- Mobile Menu -->
+<div 
+  class="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300"
+  data-menu-overlay
+>
+  <div 
+    class="fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-xl translate-x-full transition-all duration-300"
+    data-menu-panel
+  >
+    <div class="flex flex-col h-full">
+      <div class="flex items-center justify-between h-16 px-6 border-b border-slate-200">
+        <a href="/" class="flex items-center">
+          <Image 
+            src="/images/logo.svg" 
+            alt="Beast Meat" 
+            width={120} 
+            height={48} 
+            class="h-12 w-auto text-[var(--color-slate-900)]" 
+          />
+        </a>
+      </div>
+      <nav class="flex-1 p-6 overflow-y-auto">
+        <ul class="flex flex-col gap-6">
+          {navigation.map(item => (
+            <li>
+              <a
+                href={item.href}
+                class={[
+                  'block text-lg py-2 transition-colors',
+                  currentPath === item.href
+                    ? 'text-[var(--color-coral-500)]'
+                    : 'text-[var(--color-slate-700)] hover:text-[var(--color-coral-500)]'
+                ].join(' ')}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href="/#services"
+              class="block text-lg py-2 text-[var(--color-slate-700)] hover:text-[var(--color-coral-500)] transition-colors"
+            >
+              Services
+            </a>
+          </li>
+          <li class="pt-4">
+            <a href="/contact" class="btn btn-primary w-full text-center">
+              Get in Touch
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script>
+  const menuButton = document.querySelector('[aria-expanded]') as HTMLButtonElement;
+  const menuOverlay = document.querySelector('[data-menu-overlay]') as HTMLElement;
+  const menuPanel = document.querySelector('[data-menu-panel]') as HTMLElement;
+
+  if (menuButton && menuOverlay && menuPanel) {
+    function toggleMenu(open: boolean) {
+      // Update button state and animation
+      menuButton.setAttribute('aria-expanded', String(open));
+      const [top, middle, bottom] = menuButton.querySelectorAll('span');
+      
+      if (open) {
+        // Show menu
+        menuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        menuPanel.classList.remove('translate-x-full');
+        document.body.style.overflow = 'hidden';
+        
+        // Animate to X
+        top.classList.add('rotate-45', 'translate-y-[0.55rem]');
+        middle.classList.add('opacity-0');
+        bottom.classList.add('-rotate-45', 'translate-y-[-0.55rem]');
+      } else {
+        // Hide menu
+        menuOverlay.classList.add('opacity-0', 'pointer-events-none');
+        menuPanel.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+        
+        // Animate back to hamburger
+        top.classList.remove('rotate-45', 'translate-y-[0.55rem]');
+        middle.classList.remove('opacity-0');
+        bottom.classList.remove('-rotate-45', 'translate-y-[-0.55rem]');
+      }
+    }
+
+    // Toggle menu on button click
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      toggleMenu(!isOpen);
+    });
+
+    // Close menu when clicking overlay
+    menuOverlay.addEventListener('click', (e) => {
+      if (e.target === menuOverlay) {
+        toggleMenu(false);
+      }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+        toggleMenu(false);
+      }
+    });
+  }
+</script> 

@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/common/Container.astro';
+import ServicesSection from '../components/sections/ServicesSection.astro';
+---
+
+<Layout title="Beast Meat - Premium Butchery & Catering">
+  <main>
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+      <!-- Hero Background -->
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-meat-charred)] via-[var(--color-meat-charred)]/80 to-transparent z-10"></div>
+        <img
+          src="/images/catering_photos/meat_on_fire.jpg"
+          alt="Premium meat cuts"
+          class="w-full h-full object-cover object-[50%_50%]"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      
+      <!-- Hero Content -->
+      <Container class="relative z-20 text-white">
+        <h1 class="max-w-4xl">
+          Exceptional Cuts,<br/>
+          <span class="text-[var(--color-coral-500)]">Extraordinary Service</span>
+        </h1>
+        <p class="text-[var(--text-xl)] mt-[var(--space-lg)] mb-[var(--space-xl)] max-w-2xl">
+          Premium butchery and catering services for those who demand nothing but the finest quality meats and dining experiences.
+        </p>
+        <div class="flex gap-[var(--space-md)]">
+          <a href="#services" class="btn btn-primary">
+            Our Services
+          </a>
+          <a href="#contact" class="border-2 border-white px-[var(--space-lg)] py-[var(--space-sm)] rounded-[var(--radius-default)] font-semibold transition-all duration-[var(--duration-default)] hover:bg-white hover:text-[var(--color-meat-charred)]">
+            Contact Us
+          </a>
+        </div>
+      </Container>
+    </section>
+
+    <!-- Services Section -->
+    <div id="services">
+      <ServicesSection />
+    </div>
+  </main>
+</Layout>

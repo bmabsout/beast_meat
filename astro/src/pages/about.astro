@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/common/Section.astro';
+import Container from '../components/common/Container.astro';
+
+const teamMembers = [
+  {
+    role: 'Head Butcher',
+    description: 'Expert in traditional and modern butchery techniques with over 15 years of experience.'
+  },
+  {
+    role: 'Executive Chef',
+    description: 'Culinary innovator specializing in premium meat preparation and catering excellence.'
+  },
+  {
+    role: 'Catering Manager',
+    description: 'Dedicated to creating memorable events and exceptional dining experiences.'
+  },
+  {
+    role: 'Events Coordinator',
+    description: 'Ensuring seamless execution of events from planning to delivery.'
+  }
+];
+
+const certifications = [
+  'Health Department Certification',
+  'Food Handler\'s License',
+  'Catering License',
+  'USDA Compliance Certification'
+];
+---
+
+<Layout 
+  title="About Beast Meat - Premium Butchery & Catering"
+  description="Learn about Beast Meat's commitment to quality, our expert team, and our dedication to exceptional meat and catering services."
+>
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <Section class="bg-[var(--color-meat-charred)] text-white py-24 md:py-32">
+      <Container>
+        <div class="max-w-3xl mx-auto text-center space-y-6">
+          <h1 class="font-heading text-5xl md:text-6xl">
+            Our <span class="text-[var(--color-beast-red)]">Story</span>
+          </h1>
+          <p class="text-lg md:text-xl text-slate-300">
+            A legacy of excellence in butchery and catering, built on tradition and innovation.
+          </p>
+        </div>
+      </Container>
+    </Section>
+
+    <!-- Team Section -->
+    <Section class="bg-[var(--color-slate-100)]">
+      <Container>
+        <div class="max-w-3xl mx-auto text-center space-y-12">
+          <div class="space-y-4">
+            <h2 class="font-heading text-4xl">Meet Our Team</h2>
+            <p class="text-slate-700 text-lg">
+              Our dedicated professionals bring together decades of experience in butchery and catering.
+            </p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-8">
+            {teamMembers.map(member => (
+              <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h3 class="font-heading text-xl mb-2 text-[var(--color-beast-red)]">
+                  {member.role}
+                </h3>
+                <p class="text-slate-600">{member.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </Section>
+
+    <!-- Standards Section -->
+    <Section>
+      <Container>
+        <div class="max-w-3xl mx-auto space-y-12">
+          <div class="text-center space-y-4">
+            <h2 class="font-heading text-4xl">Our Standards</h2>
+            <p class="text-slate-700 text-lg">
+              We maintain the highest standards of quality and safety in every aspect of our operation.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {certifications.map(cert => (
+              <div class="bg-[var(--color-slate-100)] p-4 rounded-lg text-center">
+                <p class="text-sm font-medium text-slate-700">{cert}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="text-center">
+            <a 
+              href="/contact" 
+              class="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-beast-red)] text-white font-semibold rounded-lg hover:bg-[var(--color-meat-raw)] transition-colors"
+            >
+              Get in Touch
+            </a>
+          </div>
+        </div>
+      </Container>
+    </Section>
+  </main>
+</Layout> 
