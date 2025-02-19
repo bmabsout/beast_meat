@@ -120,13 +120,13 @@ const currentPath = Astro.url.pathname;
   </div>
 </div>
 
-<script>
-  const menuButton = document.querySelector('[aria-expanded]') as HTMLButtonElement;
-  const menuOverlay = document.querySelector('[data-menu-overlay]') as HTMLElement;
-  const menuPanel = document.querySelector('[data-menu-panel]') as HTMLElement;
+<script is:inline>
+  const menuButton = document.querySelector('[aria-expanded]');
+  const menuOverlay = document.querySelector('[data-menu-overlay]');
+  const menuPanel = document.querySelector('[data-menu-panel]');
 
   if (menuButton && menuOverlay && menuPanel) {
-    function toggleMenu(open: boolean) {
+    function toggleMenu(open) {
       // Update button state and animation
       menuButton.setAttribute('aria-expanded', String(open));
       const [top, middle, bottom] = menuButton.querySelectorAll('span');
