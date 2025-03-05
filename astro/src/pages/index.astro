@@ -5,6 +5,7 @@ import ServicesSection from '../components/sections/ServicesSection.astro';
 import AboutSection from '../components/sections/AboutSection.astro';
 import Section from '../components/common/Section.astro';
 import { Image } from 'astro:assets';
+import FireEffect from '../components/effects/FireEffect.astro';
 
 const contactInfo = {
   phone: '+971 4 330 6680',
@@ -20,20 +21,22 @@ const contactInfo = {
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
       <!-- Hero Background -->
       <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-meat-charred)] via-[var(--color-meat-charred)]/80 to-transparent z-10"></div>
         <Image
           src="/images/catering_photos/meat_on_fire.jpg"
           alt="Premium meat cuts"
           width={1920}
           height={1080}
-          class="w-full h-full object-cover object-[50%_50%]"
+          class="w-full h-full object-cover object-[50%_50%] z-[1]"
           loading="eager"
           decoding="async"
         />
+        <!-- Fire Effect Overlay -->
+        <FireEffect />
+        <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-meat-charred)] via-[var(--color-meat-charred)]/80 to-transparent z-[10]"></div>
       </div>
       
       <!-- Hero Content -->
-      <Container class="relative z-20 text-white">
+      <Container class="relative z-[20] text-white">
         <h1 class="max-w-4xl">
           Exceptional Cuts,<br/>
           <span class="text-[var(--color-coral-500)]">Extraordinary Service</span>

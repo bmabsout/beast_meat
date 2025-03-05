@@ -12,7 +12,7 @@
    - [x] Add about section images
    - [x] Services section implementation
    - [x] Contact form implementation
-   - [ ] Call-to-action areas
+   - [x] Call-to-action areas
 
 3. **UI Fixes**
    - [ ] Fix logo SVG color inheritance in Footer
@@ -41,6 +41,10 @@
    - [ ] Verify contact info
    - [ ] Test form submissions
 
+5. **Visual Effects**
+   - [x] Implement fire effect on hero image
+   - [ ] Add subtle animations to UI elements
+
 ## 📈 Progress Tracking
 - [x] About section completed
 - [x] Services section completed
@@ -48,6 +52,7 @@
 - [x] Navigation implemented
 - [x] Contact form working with Google Forms integration
 - [x] Google Maps integration completed
+- [x] Fire effect animation on hero image
 - [ ] Site deployment
 
 ## 📚 Documentation
@@ -87,4 +92,4 @@
 2. **Performance Testing**
    - [ ] Lighthouse audit
    - [ ] Core Web Vitals check
-   - [ ] Image optimization verification 
+   - [x] Image optimization verification 
