@@ -4,6 +4,7 @@ import Container from '../components/common/Container.astro';
 import ServicesSection from '../components/sections/ServicesSection.astro';
 import AboutSection from '../components/sections/AboutSection.astro';
 import Section from '../components/common/Section.astro';
+import { Image } from 'astro:assets';
 
 const contactInfo = {
   phone: '+971 4 330 6680',
@@ -20,9 +21,11 @@ const contactInfo = {
       <!-- Hero Background -->
       <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-meat-charred)] via-[var(--color-meat-charred)]/80 to-transparent z-10"></div>
-        <img
+        <Image
           src="/images/catering_photos/meat_on_fire.jpg"
           alt="Premium meat cuts"
+          width={1920}
+          height={1080}
           class="w-full h-full object-cover object-[50%_50%]"
           loading="eager"
           decoding="async"

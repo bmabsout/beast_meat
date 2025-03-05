@@ -1,6 +1,7 @@
 ---
 import Container from '../common/Container.astro';
 import Section from '../common/Section.astro';
+import { Image } from 'astro:assets';
 
 export interface Props {
   class?: string;
@@ -16,32 +17,40 @@ const { class: className } = Astro.props;
       <div class="grid grid-cols-2 gap-4">
         <div class="space-y-4">
           <div class="aspect-[4/5] bg-slate-100 rounded-lg overflow-hidden">
-            <img
+            <Image
               src="/images/catering_photos/cuts.jpg"
               alt="Premium meat cuts selection"
+              width={500}
+              height={625}
               class="w-full h-full object-cover"
             />
           </div>
           <div class="aspect-[4/3] bg-slate-100 rounded-lg overflow-hidden">
-            <img
+            <Image
               src="/images/catering_photos/grape_leafs.jpg"
               alt="Delicious grape leaf preparation"
+              width={500}
+              height={375}
               class="w-full h-full object-cover"
             />
           </div>
         </div>
         <div class="space-y-4 pt-8">
           <div class="aspect-[4/3] bg-slate-100 rounded-lg overflow-hidden">
-            <img
+            <Image
               src="/images/catering_photos/474470988_17861235624339547_6562859976884574656_n.jpg"
               alt="Catering presentation"
+              width={500}
+              height={375}
               class="w-full h-full object-cover"
             />
           </div>
           <div class="aspect-[4/5] bg-slate-100 rounded-lg overflow-hidden">
-            <img
+            <Image
               src="/images/catering_photos/474526161_17861510733339547_4694253364427067020_n.jpg"
               alt="Professional catering service"
+              width={500}
+              height={625}
               class="w-full h-full object-cover"
             />
           </div>
