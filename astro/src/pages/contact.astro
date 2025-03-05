@@ -238,70 +238,19 @@ const socialLinks = [
           </div>
           
           <div class="bg-white p-4 rounded-lg shadow-sm overflow-hidden">
-            <!-- Stylized map placeholder with Beast Meat theme -->
-            <div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg relative overflow-hidden">
-              <!-- Stylized map grid lines -->
-              <div class="absolute inset-0 grid grid-cols-6 grid-rows-4">
-                {Array(24).fill(0).map((_, i) => (
-                  <div class="border border-slate-300/20"></div>
-                ))}
-              </div>
-              
-              <!-- Map roads -->
-              <div class="absolute inset-0">
-                <div class="absolute top-[30%] left-0 right-0 h-[2px] bg-slate-300/50"></div>
-                <div class="absolute top-[60%] left-0 right-0 h-[3px] bg-slate-300/60"></div>
-                <div class="absolute left-[25%] top-0 bottom-0 w-[2px] bg-slate-300/50"></div>
-                <div class="absolute left-[75%] top-0 bottom-0 w-[3px] bg-slate-300/60"></div>
-              </div>
-              
-              <!-- Beast Meat location marker -->
-              <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <!-- Marker pin with pulse effect -->
-                <div class="relative">
-                  <!-- Pulse animation -->
-                  <div class="absolute -inset-4 rounded-full bg-[var(--color-beast-red)]/20 animate-ping opacity-75"></div>
-                  <div class="absolute -inset-8 rounded-full bg-[var(--color-beast-red)]/10 animate-pulse opacity-50"></div>
-                  
-                  <!-- Pin -->
-                  <div class="relative w-16 h-16 flex items-center justify-center">
-                    <svg viewBox="0 0 24 24" class="w-16 h-16 text-[var(--color-beast-red)]" fill="currentColor">
-                      <path d="M12 0C7.802 0 4 3.403 4 7.602C4 11.8 7.469 16.812 12 24C16.531 16.812 20 11.8 20 7.602C20 3.403 16.199 0 12 0ZM12 11C10.343 11 9 9.657 9 8C9 6.343 10.343 5 12 5C13.657 5 15 6.343 15 8C15 9.657 13.657 11 12 11Z" />
-                    </svg>
-                    
-                    <!-- Beast Meat logo in pin -->
-                    <div class="absolute inset-0 flex items-center justify-center">
-                      <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center">
-                        <span class="font-heading text-[var(--color-beast-red)] text-xs font-bold">BM</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Location label -->
-                <div class="absolute top-12 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 rounded-lg shadow-md whitespace-nowrap">
-                  <p class="font-medium text-[var(--color-meat-charred)]">Beast Meat</p>
-                  <p class="text-xs text-slate-600">Dubai Hills Community</p>
-                </div>
-              </div>
-              
-              <!-- Compass rose -->
-              <div class="absolute top-4 right-4 w-12 h-12 bg-white/80 rounded-full flex items-center justify-center">
-                <svg viewBox="0 0 24 24" class="w-8 h-8 text-[var(--color-beast-red)]" fill="currentColor">
-                  <path d="M12 2L14.85 9.15L22 12L14.85 14.85L12 22L9.15 14.85L2 12L9.15 9.15L12 2Z" />
-                </svg>
-              </div>
-              
-              <!-- Scale indicator -->
-              <div class="absolute bottom-4 left-4 bg-white/80 px-3 py-1 rounded-md text-xs text-slate-700 flex items-center">
-                <div class="w-12 h-1 bg-slate-400 mr-2"></div>
-                <span>500m</span>
-              </div>
-              
-              <!-- Coming soon notice -->
-              <div class="absolute bottom-4 right-4 bg-[var(--color-beast-red)] text-white px-3 py-1 rounded-md text-xs font-medium">
-                Interactive Map Coming Soon
-              </div>
+            <!-- Actual Google Maps embed -->
+            <div class="aspect-video rounded-lg overflow-hidden">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.4641311841296!2d55.23999!3d25.1285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6b5a5a7bb0c9%3A0x3c2e2c5e2c5e2c5e!2sDubai%20Hills%20Community%2C%20Dubai!5e0!3m2!1sen!2sae!4v1646579863693!5m2!1sen!2sae" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Beast Meat location in Dubai Hills"
+                class="w-full h-full"
+              ></iframe>
             </div>
             
             <!-- Map footer with directions link -->

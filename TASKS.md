@@ -47,7 +47,7 @@
 - [x] Hero section with dynamic image
 - [x] Navigation implemented
 - [x] Contact form working with Google Forms integration
-- [x] Stylized map placeholder implemented
+- [x] Google Maps integration completed
 - [ ] Site deployment
 
 ## 📚 Documentation
@@ -63,6 +63,7 @@
    - [x] Add contact information display
    - [x] Set up Google Forms integration for different inquiry types
    - [x] Create stylized map placeholder
+   - [x] Replace placeholder with actual Google Maps embed
    - [ ] Update Google Forms links with actual forms
 
 2. **Additional Pages**
