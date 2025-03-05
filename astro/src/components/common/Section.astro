@@ -2,11 +2,13 @@
 interface Props {
   class?: string;
   background?: 'white' | 'slate' | 'dark';
+  id?: string;
 }
 
 const { 
   class: className = '',
-  background = 'white'
+  background = 'white',
+  id
 } = Astro.props;
 
 const bgColors = {
@@ -16,10 +18,13 @@ const bgColors = {
 };
 ---
 
-<section class:list={[
-  'py-12 md:py-16 lg:py-20',
-  bgColors[background],
-  className
-]}>
+<section 
+  class:list={[
+    'py-12 md:py-16 lg:py-20',
+    bgColors[background],
+    className
+  ]}
+  id={id}
+>
   <slot />
 </section> 

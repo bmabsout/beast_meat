@@ -22,12 +22,28 @@ const teamMembers = [
   }
 ];
 
+const qualityStandards = [
+  'Global sourcing from the best producers',
+  'Locally produced options',
+  'Experienced staff with long tradition',
+  'Finest ingredients for prepared meals',
+  'Hand-crafted stations for catering'
+];
+
 const certifications = [
   'Health Department Certification',
   'Food Handler\'s License',
   'Catering License',
   'USDA Compliance Certification'
 ];
+
+const contactInfo = {
+  phone: '+971 4 330 6680',
+  email: 'customerservice@beastmeat.com',
+  website: 'beastmeat.com',
+  address: 'Acacia 1 - Dubai Hills - Dubai, UAE',
+  hours: 'Monday-Saturday: 9am-8pm, Sunday: 10am-6pm'
+};
 ---
 
 <Layout 
@@ -43,14 +59,77 @@ const certifications = [
             Our <span class="text-[var(--color-beast-red)]">Story</span>
           </h1>
           <p class="text-lg md:text-xl text-slate-300">
-            A legacy of excellence in butchery and catering, built on tradition and innovation.
+            A legacy of excellence in butchery and catering, spanning over 25 years of experience.
           </p>
         </div>
       </Container>
     </Section>
 
-    <!-- Team Section -->
+    <!-- About Section -->
+    <Section>
+      <Container>
+        <div class="max-w-3xl mx-auto space-y-8">
+          <div class="space-y-4">
+            <h2 class="font-heading text-4xl text-center">About Beast Meat</h2>
+            <p class="text-slate-700 text-lg">
+              Beast Meat has extensive experience spanning over 25 years of sourcing and supplying meat and meat products throughout the region and we strive to extend that to our customers in Dubai. Our extensive sourcing network covers the whole world making sure we give you product from the best producers to suit all your requirements.
+            </p>
+            <p class="text-slate-700 text-lg">
+              To further enrich the experience of our customers Beast is currently providing a full experience, be it for your daily butchery requirements, a hot meal, or a lavish live station catering experience.
+            </p>
+            <p class="text-slate-700 text-lg">
+              Nestled in the Dubai Hills community, our store offers upwards of 3000 square feet of an extensive offering to cover everything you might need from a butchery and more!
+            </p>
+          </div>
+        </div>
+      </Container>
+    </Section>
+
+    <!-- Services Overview -->
     <Section class="bg-[var(--color-slate-100)]">
+      <Container>
+        <div class="max-w-3xl mx-auto space-y-12">
+          <div class="text-center space-y-4">
+            <h2 class="font-heading text-4xl">Our Services</h2>
+            <p class="text-slate-700 text-lg">
+              We provide a comprehensive range of premium meat and catering services.
+            </p>
+          </div>
+
+          <div class="space-y-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <h3 class="font-heading text-2xl mb-3 text-[var(--color-beast-red)]">
+                Butchery Services
+              </h3>
+              <p class="text-slate-600 mb-4">
+                Beast sources its meats from the best producers globally. We have an extensive offering covering global sourcing as well as locally produced to fit any application, be it for your kitchen or your weekend barbeque. We have an experienced staff with a long tradition in this field that would love to help you navigate the meat world and offer all the assistance you would like.
+              </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <h3 class="font-heading text-2xl mb-3 text-[var(--color-beast-red)]">
+                Kitchen Services
+              </h3>
+              <p class="text-slate-600 mb-4">
+                Beast has decided to extend the butchery experience into preparing the finest meals for you utilizing the best ingredients on offer. Our executive Chef goes through great lengths to source those ingredients and to make sure you would be having a taste that you will remember. A lot of thought and trials have been put forward towards creating our menu and each and every offering has been crafted with care.
+              </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <h3 class="font-heading text-2xl mb-3 text-[var(--color-beast-red)]">
+                Catering Services
+              </h3>
+              <p class="text-slate-600 mb-4">
+                Raise your barbeque level to another tier! Beast offers the possibility of having us come to your garden and creating a novel take on live stations; be it Steaks, Burgers, Seafood, or Oriental BBQ all cooked on firewood. We have an extensive Live Stations Menu to suit any of your occasions. We handle the whole experience from start to end, our Grill Masters go to great lengths to take care of you and your guests. Our stations have been hand crafted to ensure an exceptional dining experience, delivering both superior quality and authentic flavors that exceed customer expectations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </Section>
+
+    <!-- Team Section -->
+    <Section>
       <Container>
         <div class="max-w-3xl mx-auto text-center space-y-12">
           <div class="space-y-4">
@@ -74,31 +153,70 @@ const certifications = [
       </Container>
     </Section>
 
-    <!-- Standards Section -->
-    <Section>
+    <!-- Quality Standards Section -->
+    <Section class="bg-[var(--color-slate-100)]">
       <Container>
         <div class="max-w-3xl mx-auto space-y-12">
           <div class="text-center space-y-4">
-            <h2 class="font-heading text-4xl">Our Standards</h2>
+            <h2 class="font-heading text-4xl">Our Quality Standards</h2>
             <p class="text-slate-700 text-lg">
-              We maintain the highest standards of quality and safety in every aspect of our operation.
+              We maintain the highest standards of quality in every aspect of our operation.
             </p>
           </div>
 
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {certifications.map(cert => (
-              <div class="bg-[var(--color-slate-100)] p-4 rounded-lg text-center">
-                <p class="text-sm font-medium text-slate-700">{cert}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {qualityStandards.map(standard => (
+              <div class="bg-white p-4 rounded-lg flex items-center">
+                <div class="w-8 h-8 bg-[var(--color-beast-red)] rounded-full flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <p class="text-slate-700">{standard}</p>
               </div>
             ))}
           </div>
+        </div>
+      </Container>
+    </Section>
 
-          <div class="text-center">
+    <!-- Contact Section -->
+    <Section id="contact">
+      <Container>
+        <div class="max-w-3xl mx-auto space-y-8">
+          <div class="text-center space-y-4">
+            <h2 class="font-heading text-4xl">Contact Us</h2>
+            <p class="text-slate-700 text-lg">
+              We'd love to hear from you. Visit our contact page for specialized forms for different types of inquiries.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-lg shadow-sm text-center">
+            <div class="flex justify-center mb-6">
+              <div class="w-16 h-16 bg-[var(--color-beast-red)] rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+            </div>
+            
+            <div class="space-y-4 mb-8">
+              <p class="text-slate-700 text-lg">
+                Call us at <a href="tel:+97143306680" class="text-[var(--color-beast-red)] hover:underline font-medium">{contactInfo.phone}</a>
+              </p>
+              <p class="text-slate-700">
+                Visit our store at {contactInfo.address}
+              </p>
+              <p class="text-slate-700">
+                Our contact page offers specialized forms for catering reservations, general inquiries, butchery orders, and feedback.
+              </p>
+            </div>
+
             <a 
               href="/contact" 
-              class="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-beast-red)] text-white font-semibold rounded-lg hover:bg-[var(--color-meat-raw)] transition-colors"
+              class="inline-flex items-center justify-center px-8 py-4 bg-[var(--color-beast-red)] text-white font-semibold rounded-lg hover:bg-[var(--color-meat-raw)] transition-colors text-lg"
             >
-              Get in Touch
+              Contact Us
             </a>
           </div>
         </div>

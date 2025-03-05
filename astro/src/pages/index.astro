@@ -2,6 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/common/Container.astro';
 import ServicesSection from '../components/sections/ServicesSection.astro';
+import AboutSection from '../components/sections/AboutSection.astro';
+import Section from '../components/common/Section.astro';
+
+const contactInfo = {
+  phone: '+971 4 330 6680',
+  email: 'customerservice@beastmeat.com',
+  website: 'beastmeat.com',
+  address: 'Acacia 1 - Dubai Hills - Dubai, UAE'
+};
 ---
 
 <Layout title="Beast Meat - Premium Butchery & Catering">
@@ -27,11 +36,14 @@ import ServicesSection from '../components/sections/ServicesSection.astro';
           <span class="text-[var(--color-coral-500)]">Extraordinary Service</span>
         </h1>
         <p class="text-[var(--text-xl)] mt-[var(--space-lg)] mb-[var(--space-xl)] max-w-2xl">
-          Premium butchery and catering services for those who demand nothing but the finest quality meats and dining experiences.
+          With over 25 years of experience, Beast Meat provides premium butchery and catering services for those who demand nothing but the finest quality meats and dining experiences.
         </p>
-        <div class="flex gap-[var(--space-md)]">
+        <div class="flex flex-wrap gap-[var(--space-md)]">
           <a href="#services" class="btn btn-primary">
             Our Services
+          </a>
+          <a href="/about" class="border-2 border-white px-[var(--space-lg)] py-[var(--space-sm)] rounded-[var(--radius-default)] font-semibold transition-all duration-[var(--duration-default)] hover:bg-white hover:text-[var(--color-meat-charred)]">
+            About Us
           </a>
           <a href="#contact" class="border-2 border-white px-[var(--space-lg)] py-[var(--space-sm)] rounded-[var(--radius-default)] font-semibold transition-all duration-[var(--duration-default)] hover:bg-white hover:text-[var(--color-meat-charred)]">
             Contact Us
@@ -44,5 +56,49 @@ import ServicesSection from '../components/sections/ServicesSection.astro';
     <div id="services">
       <ServicesSection />
     </div>
+
+    <!-- About Section -->
+    <div id="about">
+      <AboutSection />
+    </div>
+
+    <!-- Contact Section -->
+    <Section id="contact" background="dark">
+      <Container>
+        <div class="max-w-3xl mx-auto text-center space-y-8">
+          <div class="space-y-4">
+            <h2 class="font-heading text-4xl md:text-5xl">Get In Touch</h2>
+            <p class="text-slate-300 text-lg">
+              Have questions or ready to place an order? We offer multiple ways to get in touch, including specialized forms for different inquiries.
+            </p>
+          </div>
+
+          <div class="flex flex-col items-center py-8">
+            <div class="w-16 h-16 bg-[var(--color-beast-red)] rounded-full flex items-center justify-center mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div class="space-y-4 text-center">
+              <p class="text-slate-300 text-lg">
+                Call us at <a href="tel:+97143306680" class="text-white hover:text-[var(--color-beast-red)] transition-colors font-medium">{contactInfo.phone}</a> or visit our store at {contactInfo.address}
+              </p>
+              <p class="text-slate-300">
+                Visit our contact page to access specialized forms for catering reservations, general inquiries, butchery orders, and feedback.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <a 
+              href="/contact" 
+              class="inline-flex items-center justify-center px-8 py-4 bg-[var(--color-beast-red)] text-white font-semibold rounded-lg hover:bg-[var(--color-meat-raw)] transition-colors text-lg"
+            >
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </Container>
+    </Section>
   </main>
 </Layout>
