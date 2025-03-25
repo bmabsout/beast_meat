@@ -134,10 +134,10 @@ import noiseTexture from '../../assets/rgba_noise_medium.png';
             fireIntensity = fireIntensity * (0.7 + horizontalSpread * 0.5);
             
             // Brighter, more saturated orange for better visibility
-            vec3 color = fireIntensity * vec3(1.0, 0.5, 0.1);
+            vec3 color = fireIntensity * vec3(1.0, 0.4, 0.1);
             
             // Apply opacity with boost for thicker appearance
-            float alpha = min(1.0, fireIntensity * opacity * 0.6);
+            float alpha = min(1.0, fireIntensity * opacity * 0.4);
             
             // Output final color with transparency
             gl_FragColor = vec4(color, alpha);
