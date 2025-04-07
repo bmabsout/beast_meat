@@ -46,8 +46,8 @@ const services = [
     <!-- ****** NEW ORDER ****** -->
     <!-- Services Overview Section FIRST -->
     <Section id="services-overview" class="services-section" background="dark">
-      <Container>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8 service-cards-grid">
+      <Container class="max-w-[700px] min-[1250px]:max-w-[2000px]">
+        <div class="grid grid-cols-1 min-[1250px]:grid-cols-3 gap-8 service-cards-grid">
           {services.map((service, index) => (
             <a 
               href={service.href} 
@@ -75,7 +75,7 @@ const services = [
                 </video>
                 
                 <!-- *** ADD FIRE EFFECT OVERLAY *** -->
-                <div class="card-fire-intro absolute inset-0 z-50 pointer-events-none transition-opacity duration-500 ease-out">
+                <div class="card-fire-intro absolute inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-[2000ms] ease-out">
                   <FireEffect />
                 </div>
                 <!-- ******************************** -->

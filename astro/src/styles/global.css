@@ -68,6 +68,7 @@
     font-family: var(--font-body);
     color: var(--color-slate-100);
     background-color: var(--color-slate-900);
+    min-width: 400px;
   }
 
   h1 {
