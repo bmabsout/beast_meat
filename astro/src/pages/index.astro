@@ -74,6 +74,12 @@ const services = [
                   />
                 </video>
                 
+                <!-- *** ADD FIRE EFFECT OVERLAY *** -->
+                <div class="card-fire-intro absolute inset-0 z-50 pointer-events-none transition-opacity duration-500 ease-out">
+                  <FireEffect />
+                </div>
+                <!-- ******************************** -->
+                
                 <!-- Reveal Block (Animated) -->
                 <div class="reveal-block absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 transition-all duration-500 ease-in-out z-10">
                   <div class="flex flex-col">
@@ -214,9 +220,22 @@ const services = [
   .service-card:hover video {
      opacity: 0.85; 
   }
+
+  /* Fire Intro Animation */
+  .card-fire-intro {
+     /* Ensure initial opacity is 0 for the wrapper */
+     opacity: 0;
+     transition: opacity 500ms ease-out;
+  }
+  .service-card.fire-active .card-fire-intro {
+    opacity: 1;
+  }
 </style>
 
 <script>
+  // Import Three.js globally for this script
+  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.174.0/build/three.module.js';
+
   document.addEventListener('DOMContentLoaded', () => {
     const serviceSection = document.querySelector('.services-section');
     const serviceCards = document.querySelectorAll('.service-card');
@@ -262,17 +281,220 @@ const services = [
     requestAnimationFrame(setInitialPositions);
     // -----------------------------------------
 
-    // --- Intersection Observer (Remains the same) --- 
+    // --- BEGIN Three.js Fire Effect Logic --- 
+
+    const fireInstances = []; // To store cleanup data
+
+    // Function to initialize fire effect on a target element
+    function initFireEffect(canvasTarget) {
+        if (!canvasTarget) return null;
+
+        try {
+            const scene = new THREE.Scene();
+            const settings = { targetFPS: 30, useHighPrecision: true, flowRate: 1.0, opacity: 1.0 };
+            const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+            
+            const containerWidth = canvasTarget.clientWidth;
+            const containerHeight = canvasTarget.clientHeight;
+            
+            const renderer = new THREE.WebGLRenderer({ 
+              alpha: true, antialias: true, powerPreference: 'high-performance', precision: 'highp' 
+            });
+            renderer.setPixelRatio(window.devicePixelRatio); 
+            renderer.setSize(containerWidth, containerHeight); 
+            
+            const canvas = renderer.domElement;
+            canvas.style.position = 'absolute';
+            canvas.style.left = '0';
+            canvas.style.top = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.imageRendering = 'auto';
+            canvas.style.transform = 'translate3d(0,0,0)';
+            canvasTarget.appendChild(canvas);
+
+            const geometry = new THREE.PlaneGeometry(2, 2);
+            const material = new THREE.ShaderMaterial({ 
+                uniforms: {
+                    u_timeSeconds: { value: 0 },
+                    u_screenSize: { value: new THREE.Vector2(containerWidth * window.devicePixelRatio, containerHeight * window.devicePixelRatio) },
+                    u_flowRate: { value: settings.flowRate },
+                    opacity: { value: settings.opacity }
+                },
+                vertexShader: `
+                    varying vec2 vUv;
+                    void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    // Uniforms
+                    uniform vec2 u_screenSize;
+                    uniform float u_timeSeconds;
+                    uniform float u_flowRate;
+                    uniform float opacity;
+                    
+                    // Varyings
+                    varying vec2 vUv;
+                    
+                    // FBM function
+                    float random(vec2 st) {
+                        return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+                    }
+                    
+                    float noise(vec2 st) {
+                        vec2 i = floor(st);
+                        vec2 f = fract(st);
+                        vec2 u = f * f * (3.0 - 2.0 * f);
+                        return mix(
+                            mix(random(i + vec2(0.0, 0.0)), random(i + vec2(1.0, 0.0)), u.x),
+                            mix(random(i + vec2(0.0, 1.0)), random(i + vec2(1.0, 1.0)), u.x),
+                            u.y
+                        );
+                    }
+                    
+                    float fbm(vec2 st) {
+                        float value = 0.0;
+                        float amplitude = 0.5;
+                        float frequency = 0.0;
+                        // Reduced number of octaves for better performance
+                        for (int i = 0; i < 4; i++) { // Reduced from 6 to 4 for better performance
+                            value += amplitude * noise(st);
+                            st *= 1.7;
+                            // Slower amplitude falloff for thicker flames
+                            amplitude *= 0.4;
+                        }
+                        return value;
+                    }
+                    
+                    void main() {
+                        // Convert from vUv to gl_FragCoord equivalent
+                        vec2 scaledCoord = vUv;
+                        
+                        // Apply FBM coordinates - reduced x scale for wider flames
+                        vec2 fbmCoord = scaledCoord * vec2(5.0, 2.0); // Reduced from 10.0 to 5.0 for x
+                        fbmCoord += vec2(0.0, -u_timeSeconds * u_flowRate);
+                        
+                        // Calculate fire color with wider spread
+                        float fireIntensity = fbm(fbmCoord) * 4.0 * (1.0 - scaledCoord.y);
+                        
+                        // Add horizontal spread to make flames thicker
+                        float horizontalSpread = 0.8 - abs(scaledCoord.x - 0.5) * 1.2; // Center-weighted falloff
+                        horizontalSpread = max(0.0, horizontalSpread);
+                        
+                        // Combine for thicker flames
+                        fireIntensity = fireIntensity * (0.7 + horizontalSpread * 0.5);
+                        
+                        // Brighter, more saturated orange for better visibility
+                        vec3 color = fireIntensity * vec3(1.0, 0.4, 0.1);
+                        
+                        // Apply opacity with boost for thicker appearance
+                        float alpha = min(1.0, fireIntensity * opacity * 0.4);
+                        
+                        // Output final color with transparency
+                        gl_FragColor = vec4(color, alpha);
+                    }
+                `,
+                transparent: true,
+                blending: THREE.AdditiveBlending
+             }); 
+
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            let lastTime = 0;
+            const frameInterval = 1000 / settings.targetFPS;
+            let isAnimating = true; 
+            let animationFrameId = null;
+
+            function animate(currentTime) {
+              if (!isAnimating) return;
+              animationFrameId = requestAnimationFrame(animate);
+              const deltaTime = currentTime - lastTime;
+              if (deltaTime < frameInterval) return;
+              material.uniforms.u_timeSeconds.value = currentTime * 0.001;
+              renderer.render(scene, camera);
+              lastTime = currentTime - (deltaTime % frameInterval);
+            }
+            
+            animate(performance.now());
+
+            function onResize() {
+              const width = canvasTarget.clientWidth;
+              const height = canvasTarget.clientHeight;
+              renderer.setSize(width, height, false);
+              const pixelRatio = window.devicePixelRatio;
+              material.uniforms.u_screenSize.value.set(width * pixelRatio, height * pixelRatio);
+            }
+            window.addEventListener('resize', onResize);
+            
+            // Return cleanup data
+            return {
+                renderer,
+                material,
+                geometry,
+                canvas,
+                canvasTarget,
+                onResizeListener: onResize,
+                stopAnimation: () => { 
+                   isAnimating = false; 
+                   if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                }
+            };
+
+        } catch (e) {
+            console.error("Error initializing fire effect:", e);
+            return null;
+        }
+    }
+
+    // Initialize fire effect for each card
+    serviceCards.forEach(card => {
+        const target = card.querySelector('.fire-canvas-target') as HTMLElement | null;
+        const instanceData = initFireEffect(target);
+        if (instanceData) {
+            fireInstances.push(instanceData);
+        }
+    });
+
+    // --- Cleanup Logic --- 
+    function cleanupFireEffects() {
+        console.log("Cleaning up fire effects...");
+        fireInstances.forEach(instance => {
+            if (instance.stopAnimation) instance.stopAnimation();
+            if (instance.onResizeListener) window.removeEventListener('resize', instance.onResizeListener);
+            if (instance.renderer) instance.renderer.dispose();
+            if (instance.material) instance.material.dispose();
+            if (instance.geometry) instance.geometry.dispose();
+            if (instance.canvasTarget && instance.canvas.parentNode === instance.canvasTarget) {
+                 instance.canvasTarget.removeChild(instance.canvas);
+            }
+        });
+        fireInstances.length = 0; // Clear the array
+        // Remove the listener itself to prevent multiple calls
+        document.removeEventListener('astro:before-swap', cleanupFireEffects);
+    }
+    document.addEventListener('astro:before-swap', cleanupFireEffects);
+
+    // --- END Three.js Fire Effect Logic ---
+
+    // --- Intersection Observer (Animation Trigger) --- 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           serviceCards.forEach((card, index) => {
-            // Trigger entrance opacity animation + partial transform via var()
+            // --- Trigger Entrance & Fire Animation --- 
             setTimeout(() => {
               if (!card.classList.contains('is-visible')) {
                  card.classList.add('is-visible');
+                 card.classList.add('fire-active'); 
+                 setTimeout(() => {
+                    card.classList.remove('fire-active');
+                 }, 1000);
               }
             }, 0); 
+            // ----------------------------------------
 
             // Trigger full reveal transform animation
             const entranceDelay = index * 150; 
@@ -294,6 +516,6 @@ const services = [
     });
 
     observer.observe(serviceSection);
-    // ---------------------------
+    // --------------------------------------------
   });
 </script>

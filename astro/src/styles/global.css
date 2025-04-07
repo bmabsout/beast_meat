@@ -115,10 +115,12 @@
     background-color: var(--color-coral-600);
   }
   
+  /* Base section padding */
   .section {
     padding-block: var(--space-2xl);
   }
   
+  /* Media query outside the base .section rule, but still in the layer */
   @media (min-width: 768px) {
     .section {
       padding-block: calc(var(--space-2xl) * 1.5);
