@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/common/Section.astro';
+import Container from '../components/common/Container.astro';
+
+// TODO: Add content specific to Butchery
+const pageTitle = "Beast Meat - Butchery Services";
+const pageDescription = "Explore Beast Meat's premium butchery services, offering globally sourced and locally produced meats.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <Section class="bg-[var(--color-meat-charred)] text-white py-20 md:py-24">
+      <Container>
+        <div class="max-w-3xl mx-auto text-center space-y-6">
+          <h1 class="font-heading text-5xl md:text-6xl">
+            The <span class="text-[var(--color-beast-red)]">Butchery</span>
+          </h1>
+          <p class="text-lg md:text-xl text-slate-300">
+            Globally sourced meats and expert guidance from our experienced staff.
+          </p>
+        </div>
+      </Container>
+    </Section>
+
+    <!-- Butchery Details Section -->
+    <Section>
+      <Container>
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="font-heading text-4xl mb-8">Butchery Details Coming Soon</h2>
+          <p class="text-slate-700 text-lg">
+            Information about our specific cuts, sourcing partners, preparation tips, and custom order options will be available here soon.
+          </p>
+          <!-- TODO: Add specific butchery content -->
+        </div>
+      </Container>
+    </Section>
+  </main>
+</Layout> 

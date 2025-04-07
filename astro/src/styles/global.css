@@ -66,8 +66,8 @@
 
   body {
     font-family: var(--font-body);
-    color: var(--color-slate-900);
-    background-color: white;
+    color: var(--color-slate-100);
+    background-color: var(--color-slate-900);
   }
 
   h1 {

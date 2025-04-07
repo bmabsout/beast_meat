@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/common/Section.astro';
+import Container from '../components/common/Container.astro';
+
+// TODO: Add content specific to Catering
+const pageTitle = "Beast Meat - Catering Services";
+const pageDescription = "Elevate your event with Beast Meat's bespoke catering services, featuring live stations cooked on firewood.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <Section class="bg-[var(--color-meat-charred)] text-white py-20 md:py-24">
+      <Container>
+        <div class="max-w-3xl mx-auto text-center space-y-6">
+          <h1 class="font-heading text-5xl md:text-6xl">
+            Event <span class="text-[var(--color-beast-red)]">Catering</span>
+          </h1>
+          <p class="text-lg md:text-xl text-slate-300">
+            Creating novel live station experiences cooked on firewood for any occasion.
+          </p>
+        </div>
+      </Container>
+    </Section>
+
+    <!-- Catering Details Section -->
+    <Section>
+      <Container>
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="font-heading text-4xl mb-8">Catering Details Coming Soon</h2>
+          <p class="text-slate-700 text-lg">
+            Our live station menus, package options, booking information, and event gallery will be featured here shortly.
+          </p>
+          <!-- TODO: Add specific catering content -->
+        </div>
+      </Container>
+    </Section>
+  </main>
+</Layout> 

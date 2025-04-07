@@ -5,13 +5,12 @@ import { Image } from 'astro:assets';
 const navigation = {
   company: [
     { name: 'About', href: '/about' },
-    { name: 'Services', href: '/services' },
     { name: 'Contact', href: '/contact' }
   ],
-  menu: [
-    { name: 'Butchery', href: '/menu#butchery' },
-    { name: 'Catering', href: '/menu#catering' },
-    { name: 'Packages', href: '/menu#packages' }
+  services: [
+    { name: 'Butchery', href: '/butchery' },
+    { name: 'Kitchen', href: '/kitchen' },
+    { name: 'Catering', href: '/catering' }
   ],
   social: [
     {
@@ -36,17 +35,17 @@ const navigation = {
 <footer class="bg-[var(--color-meat-charred)] text-white">
   <Container>
     <div class="py-12 md:py-16">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
         <!-- Company Info -->
-        <div class="text-white">
+        <div class="md:col-span-1 lg:col-span-2 text-white">
           <Image 
             src="/images/logo.svg" 
-            alt=""
+            alt="Beast Meat Logo"
             width={120} 
             height={48}
             class="h-12 w-auto mb-6" 
           />
-          <p class="text-slate-300 mb-6">
+          <p class="text-slate-300 mb-6 max-w-sm">
             Premium butchery and catering services for those who demand nothing but the finest quality meats.
           </p>
           <div class="flex gap-4">
@@ -71,37 +70,35 @@ const navigation = {
         </div>
 
         <!-- Navigation -->
-        <div class="grid grid-cols-2 gap-8">
-          <div>
-            <h3 class="text-sm font-semibold mb-4">Company</h3>
-            <ul class="space-y-3">
-              {navigation.company.map((item) => (
-                <li>
-                  <a
-                    href={item.href}
-                    class="text-slate-300 hover:text-white transition-colors"
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-sm font-semibold mb-4">Menu</h3>
-            <ul class="space-y-3">
-              {navigation.menu.map((item) => (
-                <li>
-                  <a
-                    href={item.href}
-                    class="text-slate-300 hover:text-white transition-colors"
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div class="md:col-span-1 lg:col-span-1">
+          <h3 class="text-sm font-semibold mb-4">Company</h3>
+          <ul class="space-y-3">
+            {navigation.company.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="text-slate-300 hover:text-white transition-colors"
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="md:col-span-1 lg:col-span-1">
+          <h3 class="text-sm font-semibold mb-4">Services</h3>
+          <ul class="space-y-3">
+            {navigation.services.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="text-slate-300 hover:text-white transition-colors"
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <!-- Contact -->
@@ -132,7 +129,7 @@ const navigation = {
       </div>
 
       <!-- Copyright -->
-      <div class="border-t border-slate-800 mt-12 pt-8 text-slate-400 text-sm">
+      <div class="border-t border-slate-800 mt-12 pt-8 text-slate-400 text-sm text-center md:text-left">
         <p>&copy; {new Date().getFullYear()} Beast Meat. All rights reserved.</p>
       </div>
     </div>

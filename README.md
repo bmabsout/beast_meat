@@ -66,12 +66,13 @@ pnpm preview
 
 ## Current Status
 
-- ✅ Homepage with hero section
+- ✅ Homepage with hero section & service overview (Restructured)
 - ✅ About page
 - ✅ Services section
 - ✅ Responsive design
 - ✅ Contact form
-- 🔄 Additional pages (in progress)
+- ✅ Navigation updated
+- 🚧 Placeholder pages created for Butchery, Kitchen, Catering
 - 🔄 Deployment setup (in progress)
 
 ## License

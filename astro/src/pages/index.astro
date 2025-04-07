@@ -1,8 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/common/Container.astro';
-import ServicesSection from '../components/sections/ServicesSection.astro';
-import AboutSection from '../components/sections/AboutSection.astro';
 import Section from '../components/common/Section.astro';
 import { Image } from 'astro:assets';
 import FireEffect from '../components/effects/FireEffect.astro';
@@ -13,11 +11,94 @@ const contactInfo = {
   website: 'beastmeat.com',
   address: 'Acacia 1 - Dubai Hills - Dubai, UAE'
 };
+
+// New data structure for service cards
+const services = [
+  {
+    title: 'Catering',
+    description: 'Elevate your event with bespoke live stations cooked on firewood.',
+    href: '/catering',
+    image: '/images/catering_photos/474470988_17861235624339547_6562859976884574656_n.jpg',
+    video: '/videos/catering.mp4', // Placeholder
+    alt: 'Beast Meat catering service preparing food'
+  },
+  {
+    title: 'Butchery',
+    description: 'Premium cuts sourced globally and locally, tailored to your needs.',
+    href: '/butchery',
+    image: '/images/catering_photos/cuts.jpg',
+    video: '/videos/butchery.mp4', // Placeholder
+    alt: 'Selection of premium meat cuts at Beast Meat butchery'
+  },
+  {
+    title: 'Kitchen',
+    description: 'Experience expertly prepared meals crafted from the finest ingredients.',
+    href: '/kitchen',
+    image: '/images/catering_photos/grape_leafs.jpg',
+    video: '/videos/kitchen.mp4', // Placeholder
+    alt: 'Prepared meal from Beast Meat kitchen'
+  }
+];
 ---
 
 <Layout title="Beast Meat - Premium Butchery & Catering">
   <main>
-    <!-- Hero Section -->
+    <!-- ****** NEW ORDER ****** -->
+    <!-- Services Overview Section FIRST -->
+    <Section id="services-overview" class="services-section" background="dark">
+      <Container>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8 service-cards-grid">
+          {services.map((service, index) => (
+            <a 
+              href={service.href} 
+              class="service-card group block bg-slate-900 rounded-lg shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden opacity-0 translate-y-5" 
+              style=`transition-delay: ${index * 150}ms;`
+            >
+              <div class="aspect-video relative">
+                <!-- Video Background -->
+                <video 
+                  src={service.video}
+                  autoplay 
+                  loop 
+                  muted 
+                  playsinline 
+                  class="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-500"
+                  poster={service.image}
+                >
+                  <Image 
+                    src={service.image} 
+                    alt={service.alt} 
+                    width={600} 
+                    height={338} 
+                    class="w-full h-full object-cover"
+                  />
+                </video>
+                
+                <!-- Reveal Block (Animated) -->
+                <div class="reveal-block absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 transition-all duration-500 ease-in-out z-10">
+                  <div class="flex flex-col">
+                    <h3 class="font-heading text-3xl md:text-4xl text-white mb-2 drop-shadow-lg">
+                      {service.title}
+                    </h3>
+                    <div class="flex justify-between items-end">
+                      <p class="text-white text-sm pr-4">{service.description}</p>
+                      <span class="learn-more flex-shrink-0 inline-flex items-center font-medium text-white group-hover:underline pointer-events-auto text-[0.625rem]">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </Container>
+    </Section>
+
+    <!-- Hero Section SECOND -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
       <!-- Hero Background -->
       <div class="absolute inset-0 z-0">
@@ -45,28 +126,18 @@ const contactInfo = {
           With over 25 years of experience, Beast Meat provides premium butchery and catering services for those who demand nothing but the finest quality meats and dining experiences.
         </p>
         <div class="flex flex-wrap gap-[var(--space-md)]">
-          <a href="#services" class="btn btn-primary">
+          <a href="#services-overview" class="btn btn-primary">
             Our Services
           </a>
           <a href="/about" class="border-2 border-white px-[var(--space-lg)] py-[var(--space-sm)] rounded-[var(--radius-default)] font-semibold transition-all duration-[var(--duration-default)] hover:bg-white hover:text-[var(--color-meat-charred)]">
             About Us
           </a>
-          <a href="#contact" class="border-2 border-white px-[var(--space-lg)] py-[var(--space-sm)] rounded-[var(--radius-default)] font-semibold transition-all duration-[var(--duration-default)] hover:bg-white hover:text-[var(--color-meat-charred)]">
+          <a href="/contact" class="border-2 border-white px-[var(--space-lg)] py-[var(--space-sm)] rounded-[var(--radius-default)] font-semibold transition-all duration-[var(--duration-default)] hover:bg-white hover:text-[var(--color-meat-charred)]">
             Contact Us
           </a>
         </div>
       </Container>
     </section>
-
-    <!-- Services Section -->
-    <div id="services">
-      <ServicesSection />
-    </div>
-
-    <!-- About Section -->
-    <div id="about">
-      <AboutSection />
-    </div>
 
     <!-- Contact Section -->
     <Section id="contact" background="dark">
@@ -108,3 +179,121 @@ const contactInfo = {
     </Section>
   </main>
 </Layout>
+
+<style>
+  .service-card.is-visible {
+    opacity: 1;
+    transform: translateY(0); /* Card entrance */
+  }
+
+  /* Base style for the reveal block */
+  .reveal-block {
+    transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
+    opacity: 0;
+    transform: translateY(100%); /* Start fully hidden */
+    pointer-events: none;
+  }
+
+  /* State when card is visible: Reveal block becomes opaque and partially revealed */
+  .service-card.is-visible .reveal-block {
+    opacity: 1;
+    /* Use CSS variable set by JS for initial transform */
+    transform: translateY(var(--reveal-offset)); 
+  }
+
+  /* Final State: Fully Revealed (Slide up) */
+  .service-card.content-active .reveal-block {
+    transform: translateY(0);
+    /* Opacity already 1 */
+  }
+
+  .reveal-block .learn-more {
+     pointer-events: auto;
+  }
+
+  .service-card:hover video {
+     opacity: 0.85; 
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const serviceSection = document.querySelector('.services-section');
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    if (!serviceSection || serviceCards.length === 0) {
+      console.warn('Service section or cards not found for animation.');
+      return;
+    }
+
+    // --- Function to Set Initial Reveal Position via CSS Variable ---
+    function setInitialPositions() {
+      serviceCards.forEach(card => {
+        const revealBlock = card.querySelector('.reveal-block') as HTMLElement | null;
+        const title = revealBlock?.querySelector('h3');
+
+        if (revealBlock && title) {
+          try {
+            const blockStyle = getComputedStyle(revealBlock);
+            const titleStyle = getComputedStyle(title);
+            
+            const paddingTop = parseFloat(blockStyle.paddingTop) || 16; // Default 1rem
+            const titleHeight = title.offsetHeight; 
+            const marginBottom = parseFloat(titleStyle.marginBottom) || 8; // Default 0.5rem (mb-2)
+            
+            // Calculate height needed to show block's top padding + title + title's margin-bottom
+            const visibleHeight = paddingTop + titleHeight + marginBottom;
+            
+            const initialTranslate = `calc(100% - ${visibleHeight}px)`;
+            
+            // console.log(`Card: ${title.textContent?.trim()}, Visible Height: ${visibleHeight}, Offset: ${initialTranslate}`); // Debug log
+            
+            revealBlock.style.setProperty('--reveal-offset', initialTranslate);
+
+          } catch (e) {
+            console.error('Error setting initial reveal position variable:', e);
+          }
+        }
+      });
+    }
+    // --------------------------------------------------------------
+
+    // --- Run calculation after first paint --- 
+    requestAnimationFrame(setInitialPositions);
+    // -----------------------------------------
+
+    // --- Intersection Observer (Remains the same) --- 
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          serviceCards.forEach((card, index) => {
+            // Trigger entrance opacity animation + partial transform via var()
+            setTimeout(() => {
+              if (!card.classList.contains('is-visible')) {
+                 card.classList.add('is-visible');
+              }
+            }, 0); 
+
+            // Trigger full reveal transform animation
+            const entranceDelay = index * 150; 
+            const entranceDuration = 500; 
+            const revealDelay = entranceDelay + entranceDuration + 800; 
+            
+            setTimeout(() => {
+              if (!card.classList.contains('content-active')) {
+                 card.classList.add('content-active'); 
+              }
+            }, revealDelay);
+            
+          });
+          observer.unobserve(serviceSection);
+        }
+      });
+    }, {
+      threshold: 0.1 
+    });
+
+    observer.observe(serviceSection);
+    // ---------------------------
+  });
+</script>

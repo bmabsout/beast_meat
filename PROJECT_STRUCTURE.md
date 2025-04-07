@@ -18,22 +18,23 @@ beast_meat/              # Root project directory
 │   │   │   │   ├── Footer.astro     # Site footer ✓
 │   │   │   │   ├── Header.astro     # Navigation header ✓
 │   │   │   │   └── Section.astro    # Section wrapper ✓
-│   │   │   └── sections/   # Page sections
-│   │   │       ├── AboutSection.astro  # About section ✓
-│   │   │       └── ServicesSection.astro # Services section ✓
-│   │   ├── assets/    # Asset imports
+│   │   │   └── sections/   # Page-specific section components
+│   │   │       └── AboutSection.astro  # About section component ✓
+│   │   ├── assets/    # Static assets imported by components (e.g., via astro:assets)
+│   │   │   └── ...
 │   │   ├── layouts/   # Page layouts
 │   │   │   └── Layout.astro     # Base layout with meta ✓
 │   │   ├── pages/     # File-based routing
-│   │   │   ├── index.astro      # Home page ✓
+│   │   │   ├── index.astro      # Home page ✓ (Restructured)
 │   │   │   ├── about.astro      # About page ✓
-│   │   │   ├── menu.astro       # Menu & Products (planned)
-│   │   │   ├── services.astro   # Services (planned)
+│   │   │   ├── butchery.astro   # Butchery page (New - Placeholder) 🚧
+│   │   │   ├── kitchen.astro    # Kitchen page (New - Placeholder) 🚧
+│   │   │   ├── catering.astro   # Catering page (New - Placeholder) 🚧
 │   │   │   └── contact.astro    # Contact form ✓
 │   │   └── styles/    # Global styles
 │   │       ├── global.css       # CSS variables & base ✓
 │   │       └── theme.css        # Component styles ✓
-│   ├── public/        # Static assets
+│   ├── public/        # Static assets (copied directly to build output)
 │   │   ├── images/    # Image assets
 │   │   │   ├── logo.svg         # Site logo ✓
 │   │   │   ├── catering_photos/ # Catering images ✓
@@ -46,7 +47,7 @@ beast_meat/              # Root project directory
 │   ├── tailwind.config.js      # Tailwind config ✓
 │   ├── tsconfig.json           # TypeScript config ✓
 │   └── package.json            # Dependencies ✓
-├── docs/              # Documentation
+├── docs/              # Documentation (or root .md files)
 │   ├── STYLING.md            # Design system ✓
 │   ├── TASKS.md             # Project tasks ✓
 │   ├── COMPANY_DATA.md      # Business information ✓
@@ -107,8 +108,7 @@ Core configuration for:
    - `Footer.astro`: Site footer, links
 
 2. Section Components
-   - `AboutSection.astro`: About section content
-   - `ServicesSection.astro`: Services section content
+   - `AboutSection.astro`: Reusable component for About page content ✓
 
 3. Planned UI Components
    - Button component (currently in global.css)
@@ -178,11 +178,12 @@ Core configuration for:
 
 ### Current Implementation Status
 - ✅ Base layout and components
-- ✅ Homepage with hero section
+- ✅ Homepage with hero section & service overview cards (Restructured)
 - ✅ About page
 - ✅ Services section
 - ✅ Responsive design
 - ✅ Core styling and theming
 - ✅ Contact form
-- 🔄 Additional pages (in progress)
+- ✅ Navigation updated
+- 🚧 New Service Pages (`/butchery`, `/kitchen`, `/catering`) created (Placeholders)
 - 🔄 Deployment setup (in progress) 

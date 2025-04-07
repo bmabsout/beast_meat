@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/common/Section.astro';
+import Container from '../components/common/Container.astro';
+
+// TODO: Add content specific to Kitchen
+const pageTitle = "Beast Meat - Kitchen Services";
+const pageDescription = "Taste the difference with Beast Meat's kitchen, preparing fine meals using the best ingredients.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <Section class="bg-[var(--color-meat-charred)] text-white py-20 md:py-24">
+      <Container>
+        <div class="max-w-3xl mx-auto text-center space-y-6">
+          <h1 class="font-heading text-5xl md:text-6xl">
+            Our <span class="text-[var(--color-beast-red)]">Kitchen</span>
+          </h1>
+          <p class="text-lg md:text-xl text-slate-300">
+            Extending the butchery experience by preparing the finest meals for you.
+          </p>
+        </div>
+      </Container>
+    </Section>
+
+    <!-- Kitchen Details Section -->
+    <Section>
+      <Container>
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="font-heading text-4xl mb-8">Kitchen Details Coming Soon</h2>
+          <p class="text-slate-700 text-lg">
+            Our menu, information about our Chef's specials, ingredients sourcing, and meal options will be available here shortly.
+          </p>
+          <!-- TODO: Add specific kitchen content -->
+        </div>
+      </Container>
+    </Section>
+  </main>
+</Layout> 
