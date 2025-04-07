@@ -121,7 +121,7 @@
   }
   
   /* Media query outside the base .section rule, but still in the layer */
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .section {
       padding-block: calc(var(--space-2xl) * 1.5);
     }

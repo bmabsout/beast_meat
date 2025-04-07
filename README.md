@@ -66,14 +66,16 @@ pnpm preview
 
 ## Current Status
 
-- ✅ Homepage with hero section & service overview (Restructured)
-- ✅ About page
-- ✅ Services section
-- ✅ Responsive design
-- ✅ Contact form
-- ✅ Navigation updated
-- 🚧 Placeholder pages created for Butchery, Kitchen, Catering
-- 🔄 Deployment setup (in progress)
+- ✅ Homepage restructured (video background, animations, header removed)
+- ✅ About page structure in place
+- ✅ Contact form functional
+- ✅ Placeholder pages for Butchery, Kitchen, Catering created
+- ✅ Floating WhatsApp button added
+- ✅ Dark theme applied
+- 🚧 Populate content for Butchery, Kitchen, Catering pages
+- 🚧 Finalize UI fixes (logo color, contrasts)
+- 🚧 Testing (Cross-browser, Performance)
+- 🚧 Deployment setup
 
 ## License
 

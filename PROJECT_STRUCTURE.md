@@ -16,8 +16,9 @@ beast_meat/              # Root project directory
 │   │   │   ├── common/     # Shared components
 │   │   │   │   ├── Container.astro  # Layout wrapper ✓
 │   │   │   │   ├── Footer.astro     # Site footer ✓
-│   │   │   │   ├── Header.astro     # Navigation header ✓
-│   │   │   │   └── Section.astro    # Section wrapper ✓
+│   │   │   │   ├── Header.astro     # REMOVED ❌
+│   │   │   │   ├── Section.astro    # Section wrapper ✓
+│   │   │   │   └── WhatsAppButton.astro # Floating WhatsApp button ✓
 │   │   │   └── sections/   # Page-specific section components
 │   │   │       └── AboutSection.astro  # About section component ✓
 │   │   ├── assets/    # Static assets imported by components (e.g., via astro:assets)
@@ -25,7 +26,7 @@ beast_meat/              # Root project directory
 │   │   ├── layouts/   # Page layouts
 │   │   │   └── Layout.astro     # Base layout with meta ✓
 │   │   ├── pages/     # File-based routing
-│   │   │   ├── index.astro      # Home page ✓ (Restructured)
+│   │   │   ├── index.astro      # Home page ✓ (Restructured, animated)
 │   │   │   ├── about.astro      # About page ✓
 │   │   │   ├── butchery.astro   # Butchery page (New - Placeholder) 🚧
 │   │   │   ├── kitchen.astro    # Kitchen page (New - Placeholder) 🚧
@@ -35,6 +36,7 @@ beast_meat/              # Root project directory
 │   │       ├── global.css       # CSS variables & base ✓
 │   │       └── theme.css        # Component styles ✓
 │   ├── public/        # Static assets (copied directly to build output)
+│   │   ├── videos/    # Video assets (NEW) ✓
 │   │   ├── images/    # Image assets
 │   │   │   ├── logo.svg         # Site logo ✓
 │   │   │   ├── catering_photos/ # Catering images ✓
@@ -101,11 +103,12 @@ Core configuration for:
 
 ### Component Architecture
 1. Base Components
-   - `Layout.astro`: Meta tags, fonts, global styles
+   - `Layout.astro`: Meta tags, fonts, global styles, WhatsApp button
    - `Container.astro`: Width constraints, padding
    - `Section.astro`: Vertical spacing, backgrounds
-   - `Header.astro`: Navigation, mobile menu
+   - `Header.astro`: REMOVED ❌
    - `Footer.astro`: Site footer, links
+   - `WhatsAppButton.astro`: Floating WhatsApp button ✓
 
 2. Section Components
    - `AboutSection.astro`: Reusable component for About page content ✓
@@ -177,13 +180,14 @@ Core configuration for:
 - Contextual color handling
 
 ### Current Implementation Status
-- ✅ Base layout and components
-- ✅ Homepage with hero section & service overview cards (Restructured)
-- ✅ About page
+- ✅ Base layout and components (Header removed, WhatsApp added)
+- ✅ Homepage with hero section & animated service overview cards ✓
+- ✅ About page ✓
 - ✅ Services section
-- ✅ Responsive design
-- ✅ Core styling and theming
-- ✅ Contact form
+- ✅ Responsive design ✓
+- ✅ Core styling and theming ✓ (Dark theme applied)
+- ✅ Contact form ✓
 - ✅ Navigation updated
+- ✅ Header component removed ✓
 - 🚧 New Service Pages (`/butchery`, `/kitchen`, `/catering`) created (Placeholders)
 - 🔄 Deployment setup (in progress) 

@@ -56,6 +56,9 @@
 - [x] Homepage restructured with service overview cards
 - [x] Header and Footer navigation updated
 - [x] Placeholder pages created for Butchery, Kitchen, Catering
+- [x] Header component removed
+- [x] Homepage service card animations refined (video, fire intro, reveal)
+- [x] Floating WhatsApp button added
 - [ ] Site deployment
 
 ## 📚 Documentation
