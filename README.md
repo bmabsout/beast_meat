@@ -66,16 +66,18 @@ pnpm preview
 
 ## Current Status
 
-- ✅ Homepage restructured (video background, animations, header removed)
-- ✅ About page structure in place
-- ✅ Contact form functional
-- ✅ Placeholder pages for Butchery, Kitchen, Catering created
-- ✅ Floating WhatsApp button added
-- ✅ Dark theme applied
+- ✅ Homepage restructured (ServiceCard component, animations, background logo, header removed) ✓
+- ✅ Responsive layout refined (Breakpoints, min/max widths) ✓
+- ✅ About page structure in place ✓
+- ✅ Contact form functional ✓
+- ✅ Placeholder pages for Butchery, Kitchen, Catering created ✓
+- ✅ Floating WhatsApp button added ✓
+- ✅ Dark theme applied (incl. Footer) ✓
+- ✅ UI polished (Card hover/focus effects) ✓
 - 🚧 Populate content for Butchery, Kitchen, Catering pages
 - 🚧 Finalize UI fixes (logo color, contrasts)
 - 🚧 Testing (Cross-browser, Performance)
-- 🚧 Deployment setup
+- �� Deployment setup
 
 ## License
 

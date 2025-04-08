@@ -1,0 +1,73 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import FireEffect from '../effects/FireEffect.astro';
+
+// Rename Props interface
+export interface ServiceCardProps {
+  title: string;
+  description: string;
+  href: string;
+  image: string | ImageMetadata;
+  video: string;
+  alt: string;
+  animationDelayIndex: number;
+}
+
+// Update type cast
+const { title, description, href, image, video, alt, animationDelayIndex } = Astro.props as ServiceCardProps;
+
+// Calculate delay based on index
+const animationDelay = animationDelayIndex * 150;
+---
+<!-- Temporarily remove opacity-0 and translate-y-5 for debugging -->
+<a 
+  href={href} 
+  class="service-card group block bg-slate-900 rounded-lg shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden opacity-0 translate-y-5 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-coral-500" 
+  style={`transition-delay: ${animationDelay}ms;`}
+>
+  <div class="aspect-video relative">
+    <!-- Video Background -->
+    <video 
+      src={video}
+      autoplay 
+      loop 
+      muted 
+      playsinline 
+      class="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-500"
+      poster={typeof image === 'string' ? image : undefined}
+    >
+      <!-- Fallback Image -->
+      <Image 
+        src={typeof image === 'string' ? image : image.src}
+        alt={alt} 
+        width={600}
+        height={338}
+        class="w-full h-full object-cover"
+      />
+    </video>
+
+    <!-- Fire Effect Overlay -->
+    <div class="card-fire-intro absolute inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-[2000ms] ease-out">
+      <FireEffect />
+    </div>
+    
+    <!-- Reveal Block (Animated) -->
+    <div class="reveal-block absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 transition-all duration-500 ease-in-out z-10">
+      <div class="flex flex-col">
+        <h3 class="font-heading text-3xl md:text-4xl text-white mb-2 drop-shadow-lg">
+          {title}
+        </h3>
+        <div class="flex justify-between items-end">
+          <p class="text-white text-sm pr-4">{description}</p>
+          <span class="learn-more flex-shrink-0 inline-flex items-center font-medium text-white group-hover:underline pointer-events-auto text-[0.625rem]">
+            Learn More
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</a> 

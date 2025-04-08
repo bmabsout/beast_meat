@@ -128,3 +128,51 @@
     }
   }
 }
+
+/* ============================
+   Service Card Animations 
+   ============================ */
+
+.service-card.is-visible {
+  opacity: 1;
+  transform: translateY(0); /* Card entrance */
+}
+
+/* Base style for the reveal block */
+.reveal-block {
+  transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
+  opacity: 0;
+  transform: translateY(100%); /* Start fully hidden */
+  pointer-events: none;
+}
+
+/* State when card is visible: Reveal block becomes opaque and partially revealed */
+.service-card.is-visible .reveal-block {
+  opacity: 1;
+  /* Use CSS variable set by JS for initial transform */
+  transform: translateY(var(--reveal-offset)); 
+}
+
+/* Final State: Fully Revealed (Slide up) */
+.service-card.content-active .reveal-block {
+  transform: translateY(0);
+  /* Opacity already 1 */
+}
+
+.reveal-block .learn-more {
+   pointer-events: auto;
+}
+
+.service-card:hover video {
+   opacity: 0.85; 
+}
+
+/* Fire Intro Animation */
+.card-fire-intro {
+   /* Initial opacity is set by Tailwind `opacity-0` class */
+   transition: opacity 500ms ease-out;
+}
+
+.service-card.fire-active .card-fire-intro {
+  opacity: 1;
+}

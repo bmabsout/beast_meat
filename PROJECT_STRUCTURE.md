@@ -18,15 +18,18 @@ beast_meat/              # Root project directory
 │   │   │   │   ├── Footer.astro     # Site footer ✓
 │   │   │   │   ├── Header.astro     # REMOVED ❌
 │   │   │   │   ├── Section.astro    # Section wrapper ✓
+│   │   │   │   ├── ServiceCard.astro # Service card component ✓
 │   │   │   │   └── WhatsAppButton.astro # Floating WhatsApp button ✓
 │   │   │   └── sections/   # Page-specific section components
 │   │   │       └── AboutSection.astro  # About section component ✓
 │   │   ├── assets/    # Static assets imported by components (e.g., via astro:assets)
 │   │   │   └── ...
+│   │   ├── effects/   # Special effects components (NEW) ✓
+│   │   │   └── FireEffect.astro # Three.js fire effect component ✓
 │   │   ├── layouts/   # Page layouts
 │   │   │   └── Layout.astro     # Base layout with meta ✓
 │   │   ├── pages/     # File-based routing
-│   │   │   ├── index.astro      # Home page ✓ (Restructured, animated)
+│   │   │   ├── index.astro      # Home page ✓ (Restructured, animated, background logo)
 │   │   │   ├── about.astro      # About page ✓
 │   │   │   ├── butchery.astro   # Butchery page (New - Placeholder) 🚧
 │   │   │   ├── kitchen.astro    # Kitchen page (New - Placeholder) 🚧
@@ -88,7 +91,8 @@ Core configuration for:
 {
   "dependencies": {
     "astro": "^5.3.0",
-    "astro-navbar": "^2.3.9"
+    "astro-navbar": "^2.3.9",
+    "three": "^0.174.0"
   },
   "devDependencies": {
     "@astrojs/image": "^0.18.0",
@@ -107,13 +111,17 @@ Core configuration for:
    - `Container.astro`: Width constraints, padding
    - `Section.astro`: Vertical spacing, backgrounds
    - `Header.astro`: REMOVED ❌
-   - `Footer.astro`: Site footer, links
+   - `Footer.astro`: Site footer, links (Background updated) ✓
    - `WhatsAppButton.astro`: Floating WhatsApp button ✓
+   - `ServiceCard.astro`: Service overview card (Extracted) ✓
 
-2. Section Components
+2. Effect Components
+   - `FireEffect.astro`: Three.js fire animation ✓
+
+3. Section Components
    - `AboutSection.astro`: Reusable component for About page content ✓
 
-3. Planned UI Components
+4. Planned UI Components
    - Button component (currently in global.css)
    - Card component
    - Form elements
@@ -180,14 +188,14 @@ Core configuration for:
 - Contextual color handling
 
 ### Current Implementation Status
-- ✅ Base layout and components (Header removed, WhatsApp added)
-- ✅ Homepage with hero section & animated service overview cards ✓
+- ✅ Base layout and components (Header removed, WhatsApp added, Footer updated) ✓
+- ✅ Homepage with hero section & animated service overview cards (using ServiceCard component) ✓
+- ✅ Subtle background logo added (with blur animation) ✓
 - ✅ About page ✓
-- ✅ Services section
-- ✅ Responsive design ✓
+- ✅ Responsive design adjusted (Breakpoints, widths) ✓
 - ✅ Core styling and theming ✓ (Dark theme applied)
 - ✅ Contact form ✓
-- ✅ Navigation updated
-- ✅ Header component removed ✓
-- 🚧 New Service Pages (`/butchery`, `/kitchen`, `/catering`) created (Placeholders)
+- ✅ Service card component extracted ✓
+- ✅ Card animations polished (Hover/focus) ✓
+- 🚧 New Service Pages (`/butchery`, `/kitchen`, `/catering`) content needed
 - 🔄 Deployment setup (in progress) 

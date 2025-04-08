@@ -32,7 +32,7 @@ const navigation = {
 };
 ---
 
-<footer class="bg-[var(--color-meat-charred)] text-white">
+<footer class="bg-[var(--color-slate-900)] text-white">
   <Container>
     <div class="py-12 md:py-16">
       <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -71,34 +71,34 @@ const navigation = {
 
         <!-- Navigation -->
         <div class="md:col-span-1 lg:col-span-1">
-          <h3 class="text-sm font-semibold mb-4">Company</h3>
-          <ul class="space-y-3">
-            {navigation.company.map((item) => (
-              <li>
-                <a
-                  href={item.href}
-                  class="text-slate-300 hover:text-white transition-colors"
-                >
-                  {item.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+            <h3 class="text-sm font-semibold mb-4">Company</h3>
+            <ul class="space-y-3">
+              {navigation.company.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="text-slate-300 hover:text-white transition-colors"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         <div class="md:col-span-1 lg:col-span-1">
           <h3 class="text-sm font-semibold mb-4">Services</h3>
-          <ul class="space-y-3">
+            <ul class="space-y-3">
             {navigation.services.map((item) => (
-              <li>
-                <a
-                  href={item.href}
-                  class="text-slate-300 hover:text-white transition-colors"
-                >
-                  {item.name}
-                </a>
-              </li>
-            ))}
-          </ul>
+                <li>
+                  <a
+                    href={item.href}
+                    class="text-slate-300 hover:text-white transition-colors"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
         </div>
 
         <!-- Contact -->

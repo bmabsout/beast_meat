@@ -59,6 +59,13 @@
 - [x] Header component removed
 - [x] Homepage service card animations refined (video, fire intro, reveal)
 - [x] Floating WhatsApp button added
+- [x] Layout breakpoints adjusted (1250px)
+- [x] Container max-widths adjusted (700px / 2000px)
+- [x] Global min-width added (400px)
+- [x] Subtle background logo added (with blur animation)
+- [x] Service Card component created and implemented
+- [x] Footer background color updated to slate-900
+- [x] Service card hover/focus effects polished
 - [ ] Site deployment
 
 ## 📚 Documentation

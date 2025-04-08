@@ -2,8 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Container from '../components/common/Container.astro';
 import Section from '../components/common/Section.astro';
+import ServiceCard from '../components/common/ServiceCard.astro';
 import { Image } from 'astro:assets';
-import FireEffect from '../components/effects/FireEffect.astro';
 
 const contactInfo = {
   phone: '+971 4 330 6680',
@@ -42,63 +42,34 @@ const services = [
 ---
 
 <Layout title="Beast Meat - Premium Butchery & Catering">
-  <main>
-    <!-- ****** NEW ORDER ****** -->
+  <main class="relative">
+    <!-- Background Logo -->
+    <div class="fixed inset-0 z-0 flex items-center justify-center pointer-events-none">
+        <Image 
+            id="background-logo"
+            src="/images/logo.svg"
+            alt=""
+            aria-hidden="true"
+            width={800}
+            height={267}
+            class="w-[60vw] max-w-[800px] h-auto text-slate-100 opacity-10 transition-filter duration-1000 ease-in-out"
+        />
+    </div>
+
     <!-- Services Overview Section FIRST -->
-    <Section id="services-overview" class="services-section" background="dark">
-      <Container class="max-w-[700px] min-[1250px]:max-w-[2000px]">
+    <Section id="services-overview" class="services-section" background="slate">
+      <Container class="relative z-10 max-w-[700px] min-[1250px]:max-w-[2000px]">
         <div class="grid grid-cols-1 min-[1250px]:grid-cols-3 gap-8 service-cards-grid">
           {services.map((service, index) => (
-            <a 
-              href={service.href} 
-              class="service-card group block bg-slate-900 rounded-lg shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden opacity-0 translate-y-5" 
-              style=`transition-delay: ${index * 150}ms;`
-            >
-              <div class="aspect-video relative">
-                <!-- Video Background -->
-                <video 
-                  src={service.video}
-                  autoplay 
-                  loop 
-                  muted 
-                  playsinline 
-                  class="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-500"
-                  poster={service.image}
-                >
-                  <Image 
-                    src={service.image} 
-                    alt={service.alt} 
-                    width={600} 
-                    height={338} 
-                    class="w-full h-full object-cover"
-                  />
-                </video>
-                
-                <!-- *** ADD FIRE EFFECT OVERLAY *** -->
-                <div class="card-fire-intro absolute inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-[2000ms] ease-out">
-                  <FireEffect />
-                </div>
-                <!-- ******************************** -->
-                
-                <!-- Reveal Block (Animated) -->
-                <div class="reveal-block absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/70 to-transparent opacity-0 transition-all duration-500 ease-in-out z-10">
-                  <div class="flex flex-col">
-                    <h3 class="font-heading text-3xl md:text-4xl text-white mb-2 drop-shadow-lg">
-                      {service.title}
-                    </h3>
-                    <div class="flex justify-between items-end">
-                      <p class="text-white text-sm pr-4">{service.description}</p>
-                      <span class="learn-more flex-shrink-0 inline-flex items-center font-medium text-white group-hover:underline pointer-events-auto text-[0.625rem]">
-                        Learn More
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
+            <ServiceCard 
+              title={service.title}
+              description={service.description}
+              href={service.href}
+              image={service.image} 
+              video={service.video}
+              alt={service.alt}
+              animationDelayIndex={index}
+            />
           ))}
         </div>
       </Container>
@@ -117,8 +88,6 @@ const services = [
           loading="eager"
           decoding="async"
         />
-        <!-- Fire Effect Overlay -->
-        <FireEffect />
         <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-meat-charred)] via-[var(--color-meat-charred)]/80 to-transparent z-[10]"></div>
       </div>
       
@@ -146,7 +115,7 @@ const services = [
     </section>
 
     <!-- Contact Section -->
-    <Section id="contact" background="dark">
+    <Section id="contact" background="slate">
       <Container>
         <div class="max-w-3xl mx-auto text-center space-y-8">
           <div class="space-y-4">
@@ -187,49 +156,8 @@ const services = [
 </Layout>
 
 <style>
-  .service-card.is-visible {
-    opacity: 1;
-    transform: translateY(0); /* Card entrance */
-  }
-
-  /* Base style for the reveal block */
-  .reveal-block {
-    transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
-    opacity: 0;
-    transform: translateY(100%); /* Start fully hidden */
-    pointer-events: none;
-  }
-
-  /* State when card is visible: Reveal block becomes opaque and partially revealed */
-  .service-card.is-visible .reveal-block {
-    opacity: 1;
-    /* Use CSS variable set by JS for initial transform */
-    transform: translateY(var(--reveal-offset)); 
-  }
-
-  /* Final State: Fully Revealed (Slide up) */
-  .service-card.content-active .reveal-block {
-    transform: translateY(0);
-    /* Opacity already 1 */
-  }
-
-  .reveal-block .learn-more {
-     pointer-events: auto;
-  }
-
-  .service-card:hover video {
-     opacity: 0.85; 
-  }
-
-  /* Fire Intro Animation */
-  .card-fire-intro {
-     /* Ensure initial opacity is 0 for the wrapper */
-     opacity: 0;
-     transition: opacity 500ms ease-out;
-  }
-  .service-card.fire-active .card-fire-intro {
-    opacity: 1;
-  }
+  /* REMOVE all rules related to .service-card, .reveal-block, .card-fire-intro */
+  /* Keep any other unrelated styles if they existed */
 </style>
 
 <script>
@@ -237,11 +165,13 @@ const services = [
   import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.174.0/build/three.module.js';
 
   document.addEventListener('DOMContentLoaded', () => {
-    const serviceSection = document.querySelector('.services-section');
+    const serviceSection = document.getElementById('services-overview');
     const serviceCards = document.querySelectorAll('.service-card');
+    
+    console.log('Found service cards on DOMContentLoaded:', serviceCards.length); // DEBUG LOG
 
     if (!serviceSection || serviceCards.length === 0) {
-      console.warn('Service section or cards not found for animation.');
+      console.error('Service section or cards not found!');
       return;
     }
 
@@ -283,10 +213,10 @@ const services = [
 
     // --- BEGIN Three.js Fire Effect Logic --- 
 
-    const fireInstances = []; // To store cleanup data
+    const fireInstances: any[] = []; // Add type any[]
 
     // Function to initialize fire effect on a target element
-    function initFireEffect(canvasTarget) {
+    function initFireEffect(canvasTarget: HTMLCanvasElement) {
         if (!canvasTarget) return null;
 
         try {
@@ -406,11 +336,11 @@ const services = [
             let lastTime = 0;
             const frameInterval = 1000 / settings.targetFPS;
             let isAnimating = true; 
-            let animationFrameId = null;
+            let animationFrameId: number | null = null;
 
-            function animate(currentTime) {
+            function animateFires(currentTime: number) {
               if (!isAnimating) return;
-              animationFrameId = requestAnimationFrame(animate);
+              animationFrameId = requestAnimationFrame(animateFires);
               const deltaTime = currentTime - lastTime;
               if (deltaTime < frameInterval) return;
               material.uniforms.u_timeSeconds.value = currentTime * 0.001;
@@ -418,7 +348,7 @@ const services = [
               lastTime = currentTime - (deltaTime % frameInterval);
             }
             
-            animate(performance.now());
+            animateFires(performance.now());
 
             function onResize() {
               const width = canvasTarget.clientWidth;
@@ -452,7 +382,7 @@ const services = [
     // Initialize fire effect for each card
     serviceCards.forEach(card => {
         const target = card.querySelector('.fire-canvas-target') as HTMLElement | null;
-        const instanceData = initFireEffect(target);
+        const instanceData = initFireEffect(target as HTMLCanvasElement);
         if (instanceData) {
             fireInstances.push(instanceData);
         }
@@ -481,17 +411,36 @@ const services = [
 
     // --- Intersection Observer (Animation Trigger) --- 
     const observer = new IntersectionObserver((entries) => {
+      console.log('Intersection Observer triggered:', entries); // DEBUG LOG
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          console.log('Service section is intersecting'); // DEBUG LOG
+          
+          // ---- Add blur to background logo ----
+          const bgLogo = document.getElementById('background-logo');
+          if (bgLogo) {
+            console.log('Adding blur to background logo'); // DEBUG LOG
+            bgLogo.classList.add('blur-sm');
+          }
+          // ------------------------------------
+
           serviceCards.forEach((card, index) => {
+            console.log('Processing card:', index, card); // DEBUG LOG
             // --- Trigger Entrance & Fire Animation --- 
             setTimeout(() => {
               if (!card.classList.contains('is-visible')) {
-                 card.classList.add('is-visible');
+                 console.log('Adding is-visible and removing hidden classes for card:', index); // DEBUG LOG
+                 // Remove initial hidden state classes
+                 card.classList.remove('opacity-0', 'translate-y-5'); 
+                 // Add visible state class
+                 card.classList.add('is-visible'); 
+                 
+                 // --- Fire class toggling --- 
                  card.classList.add('fire-active'); 
                  setTimeout(() => {
                     card.classList.remove('fire-active');
-                 }, 1000);
+                 }, 1000); 
+                 // -----------------------------------
               }
             }, 0); 
             // ----------------------------------------
@@ -509,12 +458,12 @@ const services = [
             
           });
           observer.unobserve(serviceSection);
+          console.log('Observer stopped observing'); // DEBUG LOG
         }
       });
-    }, {
-      threshold: 0.1 
-    });
+    }, { threshold: 0.1 });
 
+    console.log('Starting observer'); // DEBUG LOG
     observer.observe(serviceSection);
     // --------------------------------------------
   });
